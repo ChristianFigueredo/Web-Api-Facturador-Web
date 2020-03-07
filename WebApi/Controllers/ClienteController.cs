@@ -26,7 +26,7 @@ namespace WebApi.Controllers
                 {
                     foreach (Cliente c in ListadoClientes)
                     {
-                        var TD = context.TipoDocumento.SingleOrDefault(x => x.Id == c.Id);
+                        var TD = context.TipoDocumento.SingleOrDefault(x => x.Id == c.IdTipoDocumento);
                         GetClienteResponse GCR = new GetClienteResponse();
                         GCR.NOMBRE = c.Nombre;
                         GCR.APELLIDO = c.Apellido;
