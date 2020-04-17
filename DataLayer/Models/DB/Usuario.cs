@@ -1,0 +1,16 @@
+﻿using System;
+using System.Collections.Generic;
+
+namespace DataLayer.Models.DB
+{
+    public partial class Usuario
+    {
+        public int Id { get; set; }
+        public string Nickname { get; set; }
+        public string Clave { get; set; }
+        public string Perfil { get; set; }
+        public int? IdPersona { get; set; }
+
+        public virtual Persona IdPersonaNavigation { get; set; }
+    }
+}

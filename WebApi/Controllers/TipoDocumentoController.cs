@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using WebApi.Models;
+using DataLayer.Models.DB;
 using WebApi.Models.Response;
 
 namespace WebApi.Properties

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using WebApi.Models;
+using DataLayer.Models.DB;
 using WebApi.Models.Request;
 using WebApi.Models.Response;
 
@@ -27,23 +27,28 @@ namespace WebApi.Controllers
                 {
                     foreach (Cliente c in ListadoClientes)
                     {
-                        var TD = context.TipoDocumento.SingleOrDefault(x => x.Id == c.IdTipoDocumento);
-                        GetClienteResponse GCR = new GetClienteResponse();
-                        GCR.NOMBRE = c.Nombre;
-                        GCR.APELLIDO = c.Apellido;
-                        GCR.NUMERO_DOCUMENTO = c.NumeroDocumento;
-                        GCR.TELEFONO = c.Telefono;
-                        GCR.EMAIL = c.Email;
-                        GCR.DIRECCION = c.Direccion;
-                        GCR.TIPO_DOCUMENTO = TD.Acronimo;
-                        ListaClientesResponse.Add(GCR);
+                        var query = from P in context.Persona
+                                    join C in context.Cliente on P.Id equals C.IdPersona
+                                    join TD in context.TipoDocumento on P.IdTipoDocumento equals TD.Id
+
+                                    select new GetClienteResponse
+                                    {
+                                        NOMBRE = P.Nombre,
+                                        APELLIDO = P.Apellido,
+                                        NUMERO_DOCUMENTO = P.NumeroDocumento,
+                                        TELEFONO = P.Telefono,
+                                        EMAIL = P.Email,
+                                        DIRECCION = P.Direccion,
+                                        TIPO_DOCUMENTO = TD.Acronimo
+                                    };
+                        ListaClientesResponse = query.ToList();
                     }
                 } 
             }
             return ListaClientesResponse;
         }
 
-        // GET api/[controller]/ACRONIMO/NUMERO_DOCUMENTO
+        // GET 
         [HttpGet("ACRONIMO/{ACRONIMO}/NUMERO_DOCUMENTO/{NUMERO_DOCUMENTO}")]
         public RespuestaTransaccion Get(string ACRONIMO, string NUMERO_DOCUMENTO) 
         {
@@ -52,17 +57,36 @@ namespace WebApi.Controllers
             using (FacturadorWebContext context = new FacturadorWebContext()) 
             {
                 var TD = context.TipoDocumento.SingleOrDefault(x => x.Acronimo == ACRONIMO);
-
-                if (TD != null)
+                if ( TD != null )
                 {
-                    cliente = context.Cliente.SingleOrDefault(c => c.NumeroDocumento == NUMERO_DOCUMENTO && c.IdTipoDocumento == TD.Id);
-                    if (cliente != null)
-                    {
+                    // BUSCAR EN PERSONAS - CLIENTES
+                    var query_clientes = from C in context.Cliente 
+                                         join P in context.Persona on C.IdPersona equals P.Id 
+                                         join T in context.TipoDocumento on P.IdTipoDocumento equals T.Id 
+                                         where T.Acronimo == ACRONIMO && P.NumeroDocumento == NUMERO_DOCUMENTO
+                    select new Cliente { Id = C.Id };
+                    cliente = query_clientes.FirstOrDefault();
+
+                    if ( cliente != null )
+                    { 
                         return GenerarRespuesta("Cliente existe en nuestra base de datos", "0000");
                     }
                     else 
                     {
-                        return GenerarRespuesta("Error. El cliente (" + ACRONIMO + "-" + NUMERO_DOCUMENTO + ") no existe", "0002");
+                        var query_personas = context.Persona.SingleOrDefault(x => x.NumeroDocumento == NUMERO_DOCUMENTO && x.IdTipoDocumento == TD.Id);
+                        if ( query_personas != null )
+                        {
+                            Cliente nuevo_cliente = new Cliente();
+                            nuevo_cliente.Puntos = 0;
+                            nuevo_cliente.IdPersona = query_personas.Id;
+                            context.Cliente.Add(nuevo_cliente);
+                            context.SaveChanges();
+                            return GenerarRespuesta("El usuario " + query_personas.Nombre + " " + query_personas.Apellido  +" ya existe en nuestra base de datos y se ha registrado como cliente para modificar su informacion de registro buscar en clientes y haga clic en la opcion editar", "0000");
+                        }
+                        else 
+                        {
+                            return GenerarRespuesta("Error. El cliente (" + ACRONIMO + "-" + NUMERO_DOCUMENTO + ") no existe", "0002");
+                        } 
                     }
                 }
                 else
@@ -77,24 +101,27 @@ namespace WebApi.Controllers
         {
             try
             {
-                List<Cliente> resultado = null;
-
                 using (FacturadorWebContext context = new FacturadorWebContext())
                 {
                     var TD = context.TipoDocumento.SingleOrDefault(x => x.Acronimo == clienteRequest.TIPO_DOCUMENTO);
-                    resultado = context.Cliente.Where(x => x.NumeroDocumento == clienteRequest.NUMERO_DOCUMENTO && x.IdTipoDocumento == TD.Id).ToList();
+                    var resultado = context.Persona.Where(x => x.NumeroDocumento == clienteRequest.NUMERO_DOCUMENTO && x.IdTipoDocumento == TD.Id).ToList();
                     if (resultado.Count == 0)
                     {
+                        Persona persona = new Persona();
+                        persona.Nombre = clienteRequest.NOMBRE;
+                        persona.Apellido = clienteRequest.APELLIDO;
+                        persona.NumeroDocumento = clienteRequest.NUMERO_DOCUMENTO;
+                        persona.IdTipoDocumento = TD.Id;
+                        persona.Telefono = clienteRequest.TELEFONO;
+                        persona.Email = clienteRequest.EMAIL;
+                        persona.Direccion = clienteRequest.DIRECCION;
+                        context.Persona.Add(persona);
+                        context.SaveChanges();
+
+                        int id_persona_transaccion = persona.Id;
                         Cliente cliente = new Cliente();
-
-                        cliente.Nombre = clienteRequest.NOMBRE;
-                        cliente.Apellido = clienteRequest.APELLIDO;
-                        cliente.NumeroDocumento = clienteRequest.NUMERO_DOCUMENTO;
-                        cliente.IdTipoDocumento = TD.Id;
-                        cliente.Telefono = clienteRequest.TELEFONO;
-                        cliente.Email = clienteRequest.EMAIL;
-                        cliente.Direccion = clienteRequest.DIRECCION;
-
+                        cliente.Puntos = 0;
+                        cliente.IdPersona = id_persona_transaccion;
                         context.Cliente.Add(cliente);
                         context.SaveChanges();
                         return GenerarRespuesta("El cliente se registro con exito", "0000");
@@ -114,13 +141,12 @@ namespace WebApi.Controllers
         [HttpPut]
         public RespuestaTransaccion Put([FromBody] ClienteRequest clienteRequest) 
         {
-            Cliente resultado = null;
             try 
             {
                 using (FacturadorWebContext context = new FacturadorWebContext())
                 {
                     var TD = context.TipoDocumento.SingleOrDefault(x => x.Acronimo == clienteRequest.TIPO_DOCUMENTO);
-                    resultado = context.Cliente.SingleOrDefault(x => x.NumeroDocumento == clienteRequest.NUMERO_DOCUMENTO && x.IdTipoDocumento == TD.Id);
+                    var resultado = context.Persona.SingleOrDefault(x => x.NumeroDocumento == clienteRequest.NUMERO_DOCUMENTO && x.IdTipoDocumento == TD.Id);
                     if (resultado != null)
                     {
                         resultado.Nombre = clienteRequest.NOMBRE;
