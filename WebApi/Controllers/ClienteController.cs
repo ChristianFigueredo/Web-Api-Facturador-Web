@@ -53,7 +53,7 @@ namespace WebApi.Controllers
         public RespuestaTransaccion Get(string ACRONIMO, string NUMERO_DOCUMENTO) 
         {
             Cliente cliente = null;
-
+            RespuestaTransaccion RG = new RespuestaTransaccion();
             using (FacturadorWebContext context = new FacturadorWebContext()) 
             {
                 var TD = context.TipoDocumento.SingleOrDefault(x => x.Acronimo == ACRONIMO);
@@ -69,7 +69,7 @@ namespace WebApi.Controllers
 
                     if ( cliente != null )
                     { 
-                        return GenerarRespuesta("Cliente existe en nuestra base de datos", "0000");
+                        return RG.GenerarRespuesta("Cliente existe en nuestra base de datos", "0000");
                     }
                     else 
                     {
@@ -81,17 +81,17 @@ namespace WebApi.Controllers
                             nuevo_cliente.IdPersona = query_personas.Id;
                             context.Cliente.Add(nuevo_cliente);
                             context.SaveChanges();
-                            return GenerarRespuesta("El usuario " + query_personas.Nombre + " " + query_personas.Apellido  +" ya existe en nuestra base de datos y se ha registrado como cliente para modificar su informacion de registro buscar en clientes y haga clic en la opcion editar", "0000");
+                            return RG.GenerarRespuesta("El usuario " + query_personas.Nombre + " " + query_personas.Apellido  +" ya existe en nuestra base de datos y se ha registrado como cliente para modificar su informacion de registro buscar en clientes y haga clic en la opcion editar", "0000");
                         }
                         else 
                         {
-                            return GenerarRespuesta("Error. El cliente (" + ACRONIMO + "-" + NUMERO_DOCUMENTO + ") no existe", "0002");
+                            return RG.GenerarRespuesta("Error. El cliente (" + ACRONIMO + "-" + NUMERO_DOCUMENTO + ") no existe", "0002");
                         } 
                     }
                 }
                 else
                 {
-                    return GenerarRespuesta("Error. Tipo de documento (" + ACRONIMO + ") no existe", "0001");
+                    return RG.GenerarRespuesta("Error. Tipo de documento (" + ACRONIMO + ") no existe", "0001");
                 }
             }
         }
@@ -99,6 +99,7 @@ namespace WebApi.Controllers
         [HttpPost]
         public RespuestaTransaccion Post([FromBody]ClienteRequest clienteRequest)
         {
+            RespuestaTransaccion RG = new RespuestaTransaccion();
             try
             {
                 using (FacturadorWebContext context = new FacturadorWebContext())
@@ -124,23 +125,24 @@ namespace WebApi.Controllers
                         cliente.IdPersona = id_persona_transaccion;
                         context.Cliente.Add(cliente);
                         context.SaveChanges();
-                        return GenerarRespuesta("El cliente se registro con exito", "0000");
+                        return RG.GenerarRespuesta("El cliente se registro con exito", "0000");
                     }
                     else
                     {
-                        return GenerarRespuesta("Error. El cliente ya existe en nuestra base de datos", "0003");
+                        return RG.GenerarRespuesta("Error. El cliente ya existe en nuestra base de datos", "0003");
                     }
                 }
             }
             catch (Exception ex)
             {
-                return GenerarRespuesta("Ocurrio un error durante el proceso de registro", "0004", ex);
+                return RG.GenerarRespuesta("Ocurrio un error durante el proceso de registro", "0004", ex);
             }
         }
 
         [HttpPut]
         public RespuestaTransaccion Put([FromBody] ClienteRequest clienteRequest) 
         {
+            RespuestaTransaccion RG = new RespuestaTransaccion();
             try 
             {
                 using (FacturadorWebContext context = new FacturadorWebContext())
@@ -155,27 +157,18 @@ namespace WebApi.Controllers
                         resultado.Email = clienteRequest.EMAIL;
                         resultado.Telefono = clienteRequest.TELEFONO;
                         context.SaveChanges();
-                        return GenerarRespuesta("Actualizacion exitosa", "0000");
+                        return RG.GenerarRespuesta("Actualizacion exitosa", "0000");
                     }
                     else
                     {
-                        return GenerarRespuesta("Error. El cliente no existe en nuestra base de datos", "0005");
+                        return RG.GenerarRespuesta("Error. El cliente no existe en nuestra base de datos", "0005");
                     }
                 }
             }
             catch(Exception ex)            
             {
-                return GenerarRespuesta("Ocurrio un error durante la actualizacion de los datos", "0006", ex);
+                return RG.GenerarRespuesta("Ocurrio un error durante la actualizacion de los datos", "0006", ex);
             }
-        }
-
-        private RespuestaTransaccion GenerarRespuesta(string mensaje, string codigo, Exception ex = null)
-        {
-            RespuestaTransaccion RG = new RespuestaTransaccion();
-            RG.CODIGO = codigo;
-            RG.MENSAJE = mensaje;
-            RG.EXCEPTION_TRACE = ex;
-            return RG;
         }
     }
 }

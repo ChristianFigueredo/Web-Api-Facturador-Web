@@ -10,6 +10,7 @@ namespace DataLayer.Models.DB
         public string Clave { get; set; }
         public string Perfil { get; set; }
         public int? IdPersona { get; set; }
+        public bool Estado { get; set; }
 
         public virtual Persona IdPersonaNavigation { get; set; }
     }

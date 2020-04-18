@@ -205,6 +205,8 @@ namespace DataLayer.Models.DB
                     .HasMaxLength(40)
                     .IsUnicode(false);
 
+                entity.Property(e => e.Estado).HasColumnName("ESTADO");
+
                 entity.Property(e => e.IdPersona).HasColumnName("ID_PERSONA");
 
                 entity.Property(e => e.Nickname)
