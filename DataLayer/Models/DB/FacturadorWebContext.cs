@@ -56,6 +56,8 @@ namespace DataLayer.Models.DB
 
                 entity.Property(e => e.Id).HasColumnName("ID");
 
+                entity.Property(e => e.Estado).HasColumnName("ESTADO");
+
                 entity.Property(e => e.Fecha)
                     .HasColumnName("FECHA")
                     .HasColumnType("datetime");
@@ -72,25 +74,25 @@ namespace DataLayer.Models.DB
 
                 entity.Property(e => e.ValorIva)
                     .HasColumnName("VALOR_IVA")
-                    .HasColumnType("decimal(18, 0)");
+                    .HasColumnType("decimal(18, 3)");
 
                 entity.Property(e => e.ValorSubtotal)
                     .HasColumnName("VALOR_SUBTOTAL")
-                    .HasColumnType("decimal(18, 0)");
+                    .HasColumnType("decimal(18, 3)");
 
                 entity.Property(e => e.ValorTotal)
                     .HasColumnName("VALOR_TOTAL")
-                    .HasColumnType("decimal(18, 0)");
+                    .HasColumnType("decimal(18, 3)");
 
                 entity.HasOne(d => d.IdClienteNavigation)
                     .WithMany(p => p.Factura)
                     .HasForeignKey(d => d.IdCliente)
-                    .HasConstraintName("FK__FACTURA__ID_CLIE__66603565");
+                    .HasConstraintName("FK__FACTURA__ID_CLIE__70DDC3D8");
 
                 entity.HasOne(d => d.IdUsuarioNavigation)
                     .WithMany(p => p.Factura)
                     .HasForeignKey(d => d.IdUsuario)
-                    .HasConstraintName("FK__FACTURA__ID_USUA__656C112C");
+                    .HasConstraintName("FK__FACTURA__ID_USUA__6FE99F9F");
             });
 
             modelBuilder.Entity<Inventario>(entity =>
@@ -205,21 +207,29 @@ namespace DataLayer.Models.DB
 
                 entity.Property(e => e.Cantidad)
                     .HasColumnName("CANTIDAD")
-                    .HasColumnType("decimal(18, 0)");
+                    .HasColumnType("decimal(18, 3)");
 
                 entity.Property(e => e.IdFactura).HasColumnName("ID_FACTURA");
 
                 entity.Property(e => e.IdInventario).HasColumnName("ID_INVENTARIO");
 
+                entity.Property(e => e.ValorTotal)
+                    .HasColumnName("VALOR_TOTAL")
+                    .HasColumnType("decimal(18, 3)");
+
+                entity.Property(e => e.ValorUnitario)
+                    .HasColumnName("VALOR_UNITARIO")
+                    .HasColumnType("decimal(18, 3)");
+
                 entity.HasOne(d => d.IdFacturaNavigation)
                     .WithMany(p => p.Producto)
                     .HasForeignKey(d => d.IdFactura)
-                    .HasConstraintName("FK__PRODUCTO__ID_FAC__6A30C649");
+                    .HasConstraintName("FK__PRODUCTO__ID_FAC__74AE54BC");
 
                 entity.HasOne(d => d.IdInventarioNavigation)
                     .WithMany(p => p.Producto)
                     .HasForeignKey(d => d.IdInventario)
-                    .HasConstraintName("FK__PRODUCTO__ID_INV__693CA210");
+                    .HasConstraintName("FK__PRODUCTO__ID_INV__73BA3083");
             });
 
             modelBuilder.Entity<TipoDocumento>(entity =>
