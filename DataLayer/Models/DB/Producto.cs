@@ -5,19 +5,12 @@ namespace DataLayer.Models.DB
 {
     public partial class Producto
     {
-        public Producto()
-        {
-            Inventario = new HashSet<Inventario>();
-        }
-
         public int Id { get; set; }
-        public string Descripcion { get; set; }
-        public int? Cantidad { get; set; }
-        public int? ValorUnitario { get; set; }
-        public int? ValorTotal { get; set; }
+        public decimal? Cantidad { get; set; }
+        public int? IdInventario { get; set; }
         public int? IdFactura { get; set; }
 
         public virtual Factura IdFacturaNavigation { get; set; }
-        public virtual ICollection<Inventario> Inventario { get; set; }
+        public virtual Inventario IdInventarioNavigation { get; set; }
     }
 }

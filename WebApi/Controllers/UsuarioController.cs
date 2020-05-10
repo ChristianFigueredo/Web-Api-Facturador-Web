@@ -8,9 +8,11 @@ using WebApi.Models;
 using WebApi.Models.Request;
 using WebApi.Models.Response;
 using DataLayer.Models.DB;
+using Microsoft.AspNetCore.Cors;
 
 namespace WebApi.Controllers
 {
+    [EnableCors("PoliticaCors")]
     [Route("api/[controller]")]
     [ApiController]
     public class UsuarioController : ControllerBase

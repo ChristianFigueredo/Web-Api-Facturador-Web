@@ -27,6 +27,7 @@ namespace DataLayer.Models.DB
         {
             if (!optionsBuilder.IsConfigured)
             {
+#warning To protect potentially sensitive information in your connection string, you should move it out of source code. See http://go.microsoft.com/fwlink/?LinkId=723263 for guidance on storing connection strings.
                 optionsBuilder.UseSqlServer("Server=LAPTOP-HTNHL6CO\\SQLEXPRESS;Database=FacturadorWeb;Trusted_Connection=True;");
             }
         }
@@ -55,7 +56,13 @@ namespace DataLayer.Models.DB
 
                 entity.Property(e => e.Id).HasColumnName("ID");
 
+                entity.Property(e => e.Fecha)
+                    .HasColumnName("FECHA")
+                    .HasColumnType("datetime");
+
                 entity.Property(e => e.IdCliente).HasColumnName("ID_CLIENTE");
+
+                entity.Property(e => e.IdUsuario).HasColumnName("ID_USUARIO");
 
                 entity.Property(e => e.Numero)
                     .IsRequired()
@@ -78,7 +85,12 @@ namespace DataLayer.Models.DB
                 entity.HasOne(d => d.IdClienteNavigation)
                     .WithMany(p => p.Factura)
                     .HasForeignKey(d => d.IdCliente)
-                    .HasConstraintName("FK__FACTURA__ID_CLIE__4222D4EF");
+                    .HasConstraintName("FK__FACTURA__ID_CLIE__66603565");
+
+                entity.HasOne(d => d.IdUsuarioNavigation)
+                    .WithMany(p => p.Factura)
+                    .HasForeignKey(d => d.IdUsuario)
+                    .HasConstraintName("FK__FACTURA__ID_USUA__656C112C");
             });
 
             modelBuilder.Entity<Inventario>(entity =>
@@ -87,18 +99,55 @@ namespace DataLayer.Models.DB
 
                 entity.Property(e => e.Id).HasColumnName("ID");
 
-                entity.Property(e => e.IdProducto).HasColumnName("ID_PRODUCTO");
+                entity.Property(e => e.Descripcion)
+                    .HasColumnName("DESCRIPCION")
+                    .HasMaxLength(40)
+                    .IsUnicode(false);
 
-                entity.Property(e => e.TotalMaximoUnidades).HasColumnName("TOTAL_MAXIMO_UNIDADES");
+                entity.Property(e => e.FechaRegistro)
+                    .HasColumnName("FECHA_REGISTRO")
+                    .HasColumnType("datetime");
 
-                entity.Property(e => e.TotalMinimoUnidades).HasColumnName("TOTAL_MINIMO_UNIDADES");
+                entity.Property(e => e.Nombre)
+                    .HasColumnName("NOMBRE")
+                    .HasMaxLength(40)
+                    .IsUnicode(false);
 
-                entity.Property(e => e.TotalUnidades).HasColumnName("TOTAL_UNIDADES");
+                entity.Property(e => e.PorcentajeDescuento)
+                    .HasColumnName("PORCENTAJE_DESCUENTO")
+                    .HasColumnType("decimal(18, 2)");
 
-                entity.HasOne(d => d.IdProductoNavigation)
-                    .WithMany(p => p.Inventario)
-                    .HasForeignKey(d => d.IdProducto)
-                    .HasConstraintName("FK__INVENTARI__ID_PR__47DBAE45");
+                entity.Property(e => e.PorcentajeIva)
+                    .HasColumnName("PORCENTAJE_IVA")
+                    .HasColumnType("decimal(18, 1)");
+
+                entity.Property(e => e.PrecioCompra)
+                    .HasColumnName("PRECIO_COMPRA")
+                    .HasColumnType("decimal(18, 3)");
+
+                entity.Property(e => e.PrecioVenta)
+                    .HasColumnName("PRECIO_VENTA")
+                    .HasColumnType("decimal(18, 3)");
+
+                entity.Property(e => e.TotalDesincorporados)
+                    .HasColumnName("TOTAL_DESINCORPORADOS")
+                    .HasColumnType("decimal(18, 3)");
+
+                entity.Property(e => e.TotalDevueltos)
+                    .HasColumnName("TOTAL_DEVUELTOS")
+                    .HasColumnType("decimal(18, 3)");
+
+                entity.Property(e => e.TotalProceso)
+                    .HasColumnName("TOTAL_PROCESO")
+                    .HasColumnType("decimal(18, 3)");
+
+                entity.Property(e => e.TotalRecibidos)
+                    .HasColumnName("TOTAL_RECIBIDOS")
+                    .HasColumnType("decimal(18, 3)");
+
+                entity.Property(e => e.TotalVendidos)
+                    .HasColumnName("TOTAL_VENDIDOS")
+                    .HasColumnType("decimal(18, 3)");
             });
 
             modelBuilder.Entity<Persona>(entity =>
@@ -154,24 +203,23 @@ namespace DataLayer.Models.DB
 
                 entity.Property(e => e.Id).HasColumnName("ID");
 
-                entity.Property(e => e.Cantidad).HasColumnName("CANTIDAD");
-
-                entity.Property(e => e.Descripcion)
-                    .IsRequired()
-                    .HasColumnName("DESCRIPCION")
-                    .HasMaxLength(40)
-                    .IsUnicode(false);
+                entity.Property(e => e.Cantidad)
+                    .HasColumnName("CANTIDAD")
+                    .HasColumnType("decimal(18, 0)");
 
                 entity.Property(e => e.IdFactura).HasColumnName("ID_FACTURA");
 
-                entity.Property(e => e.ValorTotal).HasColumnName("VALOR_TOTAL");
-
-                entity.Property(e => e.ValorUnitario).HasColumnName("VALOR_UNITARIO");
+                entity.Property(e => e.IdInventario).HasColumnName("ID_INVENTARIO");
 
                 entity.HasOne(d => d.IdFacturaNavigation)
                     .WithMany(p => p.Producto)
                     .HasForeignKey(d => d.IdFactura)
-                    .HasConstraintName("FK__PRODUCTO__ID_FAC__44FF419A");
+                    .HasConstraintName("FK__PRODUCTO__ID_FAC__6A30C649");
+
+                entity.HasOne(d => d.IdInventarioNavigation)
+                    .WithMany(p => p.Producto)
+                    .HasForeignKey(d => d.IdInventario)
+                    .HasConstraintName("FK__PRODUCTO__ID_INV__693CA210");
             });
 
             modelBuilder.Entity<TipoDocumento>(entity =>

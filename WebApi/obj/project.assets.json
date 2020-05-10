@@ -8188,9 +8188,9 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\christian\\Desktop\\WS2019\\Webapi\\WebApi\\WebApi.csproj",
-      "projectName": "WebApi",
-      "projectPath": "C:\\Users\\christian\\Desktop\\WS2019\\Webapi\\WebApi\\WebApi.csproj",
+      "projectUniqueName": "C:\\Users\\christian\\Desktop\\WS2019\\Webapi\\WebApi\\WebApi-PERSONAS.csproj",
+      "projectName": "WebApi-PERSONAS",
+      "projectPath": "C:\\Users\\christian\\Desktop\\WS2019\\Webapi\\WebApi\\WebApi-PERSONAS.csproj",
       "packagesPath": "C:\\Users\\christian\\.nuget\\packages\\",
       "outputPath": "C:\\Users\\christian\\Desktop\\WS2019\\Webapi\\WebApi\\obj\\",
       "projectStyle": "PackageReference",
