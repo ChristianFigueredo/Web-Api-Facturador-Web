@@ -9,6 +9,10 @@ namespace DataLayer.Models.DB
         public decimal? ValorUnitario { get; set; }
         public decimal? ValorTotal { get; set; }
         public decimal? Cantidad { get; set; }
+        public decimal? PorcentajeIva { get; set; }
+        public decimal? ValorTotalIva { get; set; }
+        public decimal? PorcentajeDescuento { get; set; }
+        public decimal? ValorTotalDescuento { get; set; }
         public int? IdInventario { get; set; }
         public int? IdFactura { get; set; }
 

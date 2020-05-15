@@ -16,6 +16,7 @@ namespace DataLayer.Models.DB
         }
 
         public virtual DbSet<Cliente> Cliente { get; set; }
+        public virtual DbSet<EstadosFactura> EstadosFactura { get; set; }
         public virtual DbSet<Factura> Factura { get; set; }
         public virtual DbSet<Inventario> Inventario { get; set; }
         public virtual DbSet<Persona> Persona { get; set; }
@@ -50,27 +51,45 @@ namespace DataLayer.Models.DB
                     .HasConstraintName("FK__CLIENTE__ID_PERS__3F466844");
             });
 
+            modelBuilder.Entity<EstadosFactura>(entity =>
+            {
+                entity.ToTable("ESTADOS_FACTURA");
+
+                entity.Property(e => e.Id).HasColumnName("ID");
+
+                entity.Property(e => e.Descripcion)
+                    .HasColumnName("DESCRIPCION")
+                    .HasMaxLength(40)
+                    .IsUnicode(false);
+            });
+
             modelBuilder.Entity<Factura>(entity =>
             {
                 entity.ToTable("FACTURA");
 
                 entity.Property(e => e.Id).HasColumnName("ID");
 
-                entity.Property(e => e.Estado).HasColumnName("ESTADO");
+                entity.Property(e => e.FechaApertura)
+                    .HasColumnName("FECHA_APERTURA")
+                    .HasColumnType("datetime");
 
-                entity.Property(e => e.Fecha)
-                    .HasColumnName("FECHA")
+                entity.Property(e => e.FechaCierre)
+                    .HasColumnName("FECHA_CIERRE")
                     .HasColumnType("datetime");
 
                 entity.Property(e => e.IdCliente).HasColumnName("ID_CLIENTE");
 
+                entity.Property(e => e.IdEstado).HasColumnName("ID_ESTADO");
+
                 entity.Property(e => e.IdUsuario).HasColumnName("ID_USUARIO");
 
                 entity.Property(e => e.Numero)
-                    .IsRequired()
                     .HasColumnName("NUMERO")
-                    .HasMaxLength(40)
-                    .IsUnicode(false);
+                    .HasDefaultValueSql("(newid())");
+
+                entity.Property(e => e.ValorDescuento)
+                    .HasColumnName("VALOR_DESCUENTO")
+                    .HasColumnType("decimal(18, 3)");
 
                 entity.Property(e => e.ValorIva)
                     .HasColumnName("VALOR_IVA")
@@ -87,12 +106,17 @@ namespace DataLayer.Models.DB
                 entity.HasOne(d => d.IdClienteNavigation)
                     .WithMany(p => p.Factura)
                     .HasForeignKey(d => d.IdCliente)
-                    .HasConstraintName("FK__FACTURA__ID_CLIE__70DDC3D8");
+                    .HasConstraintName("FK__FACTURA__ID_CLIE__1DB06A4F");
+
+                entity.HasOne(d => d.IdEstadoNavigation)
+                    .WithMany(p => p.Factura)
+                    .HasForeignKey(d => d.IdEstado)
+                    .HasConstraintName("FK__FACTURA__ID_ESTA__1BC821DD");
 
                 entity.HasOne(d => d.IdUsuarioNavigation)
                     .WithMany(p => p.Factura)
                     .HasForeignKey(d => d.IdUsuario)
-                    .HasConstraintName("FK__FACTURA__ID_USUA__6FE99F9F");
+                    .HasConstraintName("FK__FACTURA__ID_USUA__1CBC4616");
             });
 
             modelBuilder.Entity<Inventario>(entity =>
@@ -213,8 +237,24 @@ namespace DataLayer.Models.DB
 
                 entity.Property(e => e.IdInventario).HasColumnName("ID_INVENTARIO");
 
+                entity.Property(e => e.PorcentajeDescuento)
+                    .HasColumnName("PORCENTAJE_DESCUENTO")
+                    .HasColumnType("decimal(18, 3)");
+
+                entity.Property(e => e.PorcentajeIva)
+                    .HasColumnName("PORCENTAJE_IVA")
+                    .HasColumnType("decimal(18, 3)");
+
                 entity.Property(e => e.ValorTotal)
                     .HasColumnName("VALOR_TOTAL")
+                    .HasColumnType("decimal(18, 3)");
+
+                entity.Property(e => e.ValorTotalDescuento)
+                    .HasColumnName("VALOR_TOTAL_DESCUENTO")
+                    .HasColumnType("decimal(18, 3)");
+
+                entity.Property(e => e.ValorTotalIva)
+                    .HasColumnName("VALOR_TOTAL_IVA")
                     .HasColumnType("decimal(18, 3)");
 
                 entity.Property(e => e.ValorUnitario)
@@ -224,12 +264,12 @@ namespace DataLayer.Models.DB
                 entity.HasOne(d => d.IdFacturaNavigation)
                     .WithMany(p => p.Producto)
                     .HasForeignKey(d => d.IdFactura)
-                    .HasConstraintName("FK__PRODUCTO__ID_FAC__74AE54BC");
+                    .HasConstraintName("FK__PRODUCTO__ID_FAC__2180FB33");
 
                 entity.HasOne(d => d.IdInventarioNavigation)
                     .WithMany(p => p.Producto)
                     .HasForeignKey(d => d.IdInventario)
-                    .HasConstraintName("FK__PRODUCTO__ID_INV__73BA3083");
+                    .HasConstraintName("FK__PRODUCTO__ID_INV__208CD6FA");
             });
 
             modelBuilder.Entity<TipoDocumento>(entity =>
