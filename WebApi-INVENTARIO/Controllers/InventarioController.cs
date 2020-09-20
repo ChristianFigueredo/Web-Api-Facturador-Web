@@ -177,11 +177,5 @@ namespace WebApi_INVENTARIO.Controllers
                 return RT.GenerarRespuesta("Error. Ocurrio un error inesperado", "0013", ex);
             }
         }
-
-        // DELETE: api/ApiWithActions/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
-        {
-        }
     }
 }

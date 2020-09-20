@@ -113,8 +113,6 @@ C:\Users\christian\Desktop\WS2019\Webapi\WebApi\bin\Debug\netcoreapp3.1\runtimes
 C:\Users\christian\Desktop\WS2019\Webapi\WebApi\bin\Debug\netcoreapp3.1\DataLayer.dll
 C:\Users\christian\Desktop\WS2019\Webapi\WebApi\bin\Debug\netcoreapp3.1\DataLayer.pdb
 C:\Users\christian\Desktop\WS2019\Webapi\WebApi\obj\Debug\netcoreapp3.1\WebApi-PERSONAS.csprojAssemblyReference.cache
-C:\Users\christian\Desktop\WS2019\Webapi\WebApi\obj\Debug\netcoreapp3.1\WebApi-PERSONAS.csproj.CoreCompileInputs.cache
-C:\Users\christian\Desktop\WS2019\Webapi\WebApi\obj\Debug\netcoreapp3.1\WebApi-PERSONAS.MvcApplicationPartsAssemblyInfo.cache
 C:\Users\christian\Desktop\WS2019\Webapi\WebApi\obj\Debug\netcoreapp3.1\WebApi-PERSONAS.AssemblyInfoInputs.cache
 C:\Users\christian\Desktop\WS2019\Webapi\WebApi\obj\Debug\netcoreapp3.1\WebApi-PERSONAS.AssemblyInfo.cs
 C:\Users\christian\Desktop\WS2019\Webapi\WebApi\obj\Debug\netcoreapp3.1\WebApi-PERSONAS.RazorTargetAssemblyInfo.cache
@@ -124,3 +122,7 @@ C:\Users\christian\Desktop\WS2019\Webapi\WebApi\obj\Debug\netcoreapp3.1\staticwe
 C:\Users\christian\Desktop\WS2019\Webapi\WebApi\obj\Debug\netcoreapp3.1\WebApi-PERSONAS.dll
 C:\Users\christian\Desktop\WS2019\Webapi\WebApi\obj\Debug\netcoreapp3.1\WebApi-PERSONAS.pdb
 C:\Users\christian\Desktop\WS2019\Webapi\WebApi\obj\Debug\netcoreapp3.1\WebApi-PERSONAS.genruntimeconfig.cache
+C:\Users\christian\Desktop\WS2019\Webapi\WebApi\bin\Debug\netcoreapp3.1\System.Collections.Immutable.dll
+C:\Users\christian\Desktop\WS2019\Webapi\WebApi\bin\Debug\netcoreapp3.1\System.Diagnostics.DiagnosticSource.dll
+C:\Users\christian\Desktop\WS2019\Webapi\WebApi\obj\Debug\netcoreapp3.1\WebApi-PERSONAS.csproj.CoreCompileInputs.cache
+C:\Users\christian\Desktop\WS2019\Webapi\WebApi\obj\Debug\netcoreapp3.1\WebApi-PERSONAS.MvcApplicationPartsAssemblyInfo.cache

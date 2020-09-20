@@ -17,20 +17,6 @@ namespace WebApi.Controllers
     [ApiController]
     public class UsuarioController : ControllerBase
     {
-        // GET: api/Usuario
-        [HttpGet]
-        public IEnumerable<string> Get()
-        {
-            return new string[] { "value1", "value2" };
-        }
-
-        // GET: api/Usuario/5
-        [HttpGet("{id}", Name = "Geto")]
-        public string Get(int id)
-        {
-            return "value";
-        }
-
         // POST: api/Usuario
         [HttpPost]
         public IniciarSesionResponse Post([FromBody] IniciarSesionRequest SessionObject)
@@ -63,20 +49,6 @@ namespace WebApi.Controllers
                 }
                 return ObjetoRespuesta;
             }
-        }
-
-        // POST: api/Usuario
-        /*[HttpPost]
-        public void Post([FromBody] string value)
-        {
-        }*/
-
-        // PUT: api/Usuario/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
-        {
-        }
-
-        
+        }     
     }
 }

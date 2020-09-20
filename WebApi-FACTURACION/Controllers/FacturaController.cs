@@ -28,25 +28,21 @@ namespace WebApi_FACTURACION.Controllers
                 ListadoFactura = context.Factura.ToList();
                 if (ListadoFactura != null)
                 {
-                    foreach (Factura c in ListadoFactura)
-                    {
-                        var query = from F in context.Factura
-                                    join E in context.EstadosFactura on F.IdEstado equals E.Id
-
-                                    select new Response_GetAllFacturas
-                                    {
-                                        Id = F.Id,
-                                        Numero = F.Numero,
-                                        ValorTotal = F.ValorTotal,
-                                        ValorSubtotal = F.ValorSubtotal,
-                                        ValorIva = F.ValorIva,
-                                        ValorDescuento = F.ValorDescuento,
-                                        FechaApertura = F.FechaApertura,
-                                        FechaCierre = F.FechaCierre,
-                                        Estado = E.Descripcion
-                                    };
-                        ListaFacturasResponse = query.ToList();
-                    }
+                    var query = from F in context.Factura
+                                join E in context.EstadosFactura on F.IdEstado equals E.Id
+                                select new Response_GetAllFacturas
+                                {
+                                     Id = F.Id,
+                                     Numero = F.Numero,
+                                     ValorTotal = F.ValorTotal,
+                                     ValorSubtotal = F.ValorSubtotal,
+                                     ValorIva = F.ValorIva,
+                                     ValorDescuento = F.ValorDescuento,
+                                     FechaApertura = F.FechaApertura,
+                                     FechaCierre = F.FechaCierre,
+                                     Estado = E.Descripcion
+                                };
+                    ListaFacturasResponse = query.ToList();
                 }
             }
             return ListaFacturasResponse;
@@ -158,7 +154,7 @@ namespace WebApi_FACTURACION.Controllers
             }
         }
 
-        // PUT: api/Factura/5
+        // PUT: api/Factura
         [HttpPut]
         public RespuestaTransaccion Put( [FromBody] UpdateFactura datos)
         {
@@ -199,10 +195,5 @@ namespace WebApi_FACTURACION.Controllers
             }
         }
 
-        // DELETE: api/ApiWithActions/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
-        {
-        }
     }
 }

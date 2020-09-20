@@ -124,3 +124,9 @@ C:\Users\christian\Desktop\WS2019\Webapi\WebApi-FACTURACION\obj\Debug\netcoreapp
 C:\Users\christian\Desktop\WS2019\Webapi\WebApi-FACTURACION\obj\Debug\netcoreapp3.1\WebApi-FACTURACION.dll
 C:\Users\christian\Desktop\WS2019\Webapi\WebApi-FACTURACION\obj\Debug\netcoreapp3.1\WebApi-FACTURACION.pdb
 C:\Users\christian\Desktop\WS2019\Webapi\WebApi-FACTURACION\obj\Debug\netcoreapp3.1\WebApi-FACTURACION.genruntimeconfig.cache
+C:\Users\christian\Desktop\WS2019\Webapi\WebApi-FACTURACION\bin\Debug\netcoreapp3.1\System.Collections.Immutable.dll
+C:\Users\christian\Desktop\WS2019\Webapi\WebApi-FACTURACION\bin\Debug\netcoreapp3.1\System.Diagnostics.DiagnosticSource.dll
+C:\Users\christian\Desktop\WS2019\Webapi\WebApi-FACTURACION\bin\Debug\netcoreapp3.1\Microsoft.Extensions.Configuration.FileExtensions.dll
+C:\Users\christian\Desktop\WS2019\Webapi\WebApi-FACTURACION\bin\Debug\netcoreapp3.1\Microsoft.Extensions.FileProviders.Abstractions.dll
+C:\Users\christian\Desktop\WS2019\Webapi\WebApi-FACTURACION\bin\Debug\netcoreapp3.1\Microsoft.Extensions.FileProviders.Physical.dll
+C:\Users\christian\Desktop\WS2019\Webapi\WebApi-FACTURACION\bin\Debug\netcoreapp3.1\Microsoft.Extensions.FileSystemGlobbing.dll

@@ -9,7 +9,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DataLayer", "DataLayer\Data
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebApi-INVENTARIO", "WebApi-INVENTARIO\WebApi-INVENTARIO.csproj", "{AC2870F1-8B4E-485D-A897-36FF60F56D75}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApi-FACTURACION", "WebApi-FACTURACION\WebApi-FACTURACION.csproj", "{6F16F5E8-3BCE-4DBD-9272-86F501A977EE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebApi-FACTURACION", "WebApi-FACTURACION\WebApi-FACTURACION.csproj", "{6F16F5E8-3BCE-4DBD-9272-86F501A977EE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CommonLayer", "CommonLayer\CommonLayer.csproj", "{70486AAF-DE61-4FFF-8D0F-B8B4A7026A07}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{6F16F5E8-3BCE-4DBD-9272-86F501A977EE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6F16F5E8-3BCE-4DBD-9272-86F501A977EE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6F16F5E8-3BCE-4DBD-9272-86F501A977EE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{70486AAF-DE61-4FFF-8D0F-B8B4A7026A07}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{70486AAF-DE61-4FFF-8D0F-B8B4A7026A07}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{70486AAF-DE61-4FFF-8D0F-B8B4A7026A07}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{70486AAF-DE61-4FFF-8D0F-B8B4A7026A07}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

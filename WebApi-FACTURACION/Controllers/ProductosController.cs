@@ -27,16 +27,11 @@ namespace WebApi_FACTURACION.Controllers
             _signalService = signalService;
             _hubContext = hubContext;
         }
-        // GET: api/Productos
-        [HttpGet]
-        public IEnumerable<string> Get()
-        {
-            return new string[] { "value1", "value2" };
-        }
+        
 
         // GET: api/Productos/5
         [HttpGet("{userId}", Name = "GetFacturaDetails")]
-        public Response_GetFacturaWithDetailscs Get(int userId)
+        public Response_GetFacturaWithDetailscs Get(int userId) // buscar una factura en curso
         {
             Response_GetFacturaWithDetailscs facturaResponse = new Response_GetFacturaWithDetailscs();
             RespuestaTransaccion RT = new RespuestaTransaccion();
@@ -68,7 +63,7 @@ namespace WebApi_FACTURACION.Controllers
 
         // POST: api/Productos
         [HttpPost]
-        public async Task<RespuestaTransaccion> PostAsync([FromBody] Request_Objetc_Add_Producto_To_Factura entrada)
+        public async Task<RespuestaTransaccion> PostAsync([FromBody] Request_Objetc_Add_Producto_To_Factura entrada) // agregar producto a la factura
         {
             RespuestaTransaccion RG = new RespuestaTransaccion();
             GetFacturaDetailResponse consulta = new GetFacturaDetailResponse();
@@ -134,7 +129,7 @@ namespace WebApi_FACTURACION.Controllers
 
         // PUT: api/Facturacion/5
         [HttpPut]
-        public async Task<RespuestaTransaccion> PutAsync([FromBody] Request_Objetc_Add_Producto_To_Factura entrada)
+        public async Task<RespuestaTransaccion> PutAsync([FromBody] Request_Objetc_Add_Producto_To_Factura entrada) // restar producto de la factura
         {
             RespuestaTransaccion RG = new RespuestaTransaccion();
             GetFacturaDetailResponse consulta = new GetFacturaDetailResponse();

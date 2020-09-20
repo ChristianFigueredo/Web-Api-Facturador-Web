@@ -124,3 +124,9 @@ C:\Users\christian\Desktop\WS2019\Webapi\WebApi-INVENTARIO\bin\Debug\netcoreapp3
 C:\Users\christian\Desktop\WS2019\Webapi\WebApi-INVENTARIO\bin\Debug\netcoreapp3.1\zh-Hant\Microsoft.CodeAnalysis.Workspaces.resources.dll
 C:\Users\christian\Desktop\WS2019\Webapi\WebApi-INVENTARIO\obj\Debug\netcoreapp3.1\WebApi-INVENTARIO.csproj.CoreCompileInputs.cache
 C:\Users\christian\Desktop\WS2019\Webapi\WebApi-INVENTARIO\obj\Debug\netcoreapp3.1\WebApi-INVENTARIO.MvcApplicationPartsAssemblyInfo.cache
+C:\Users\christian\Desktop\WS2019\Webapi\WebApi-INVENTARIO\bin\Debug\netcoreapp3.1\System.Collections.Immutable.dll
+C:\Users\christian\Desktop\WS2019\Webapi\WebApi-INVENTARIO\bin\Debug\netcoreapp3.1\System.Diagnostics.DiagnosticSource.dll
+C:\Users\christian\Desktop\WS2019\Webapi\WebApi-INVENTARIO\bin\Debug\netcoreapp3.1\Microsoft.Extensions.Configuration.FileExtensions.dll
+C:\Users\christian\Desktop\WS2019\Webapi\WebApi-INVENTARIO\bin\Debug\netcoreapp3.1\Microsoft.Extensions.FileProviders.Abstractions.dll
+C:\Users\christian\Desktop\WS2019\Webapi\WebApi-INVENTARIO\bin\Debug\netcoreapp3.1\Microsoft.Extensions.FileProviders.Physical.dll
+C:\Users\christian\Desktop\WS2019\Webapi\WebApi-INVENTARIO\bin\Debug\netcoreapp3.1\Microsoft.Extensions.FileSystemGlobbing.dll

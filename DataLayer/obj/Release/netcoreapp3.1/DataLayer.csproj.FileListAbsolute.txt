@@ -1,0 +1,8 @@
+C:\Users\christian\Desktop\WS2019\Webapi\DataLayer\obj\Release\netcoreapp3.1\DataLayer.csproj.CoreCompileInputs.cache
+C:\Users\christian\Desktop\WS2019\Webapi\DataLayer\obj\Release\netcoreapp3.1\DataLayer.AssemblyInfoInputs.cache
+C:\Users\christian\Desktop\WS2019\Webapi\DataLayer\obj\Release\netcoreapp3.1\DataLayer.AssemblyInfo.cs
+C:\Users\christian\Desktop\WS2019\Webapi\DataLayer\bin\Release\netcoreapp3.1\DataLayer.deps.json
+C:\Users\christian\Desktop\WS2019\Webapi\DataLayer\bin\Release\netcoreapp3.1\DataLayer.dll
+C:\Users\christian\Desktop\WS2019\Webapi\DataLayer\bin\Release\netcoreapp3.1\DataLayer.pdb
+C:\Users\christian\Desktop\WS2019\Webapi\DataLayer\obj\Release\netcoreapp3.1\DataLayer.dll
+C:\Users\christian\Desktop\WS2019\Webapi\DataLayer\obj\Release\netcoreapp3.1\DataLayer.pdb
